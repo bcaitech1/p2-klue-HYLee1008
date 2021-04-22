@@ -66,7 +66,7 @@ def train(args):
   tokenizer = AutoTokenizer.from_pretrained(args.bert_model)
 
   # load dataset
-  train_dataset = load_data("/opt/ml/input/data/train/augmented_google.tsv", augmented=True)
+  train_dataset = load_data("/opt/ml/input/data/train/train.tsv")
 
   train_label = train_dataset['label'].values
   
@@ -187,7 +187,6 @@ if __name__ == '__main__':
   parser.add_argument('--batch_size', type=int, default=16, help='input batch size for training (deafult: 16)')
   parser.add_argument('--num_workers', type=int, default=4, help='number of workers for dataloader (default: 4)')
   parser.add_argument('--smoothing', type=float, default=0.2, help='label smoothing facotr for label smoothing loss (default: 0.2)')
-  parser.add_argument('--augmentation', type=int, default=0, help='apply google translation augmentation (default: 0)')
 
   parser.add_argument('--learning_rate', type=float, default=1e-5, help='learning rate for training (default: 1e-5)')
   parser.add_argument('--weight_decay', type=float, default=0.01, help='weight decay (default: 0.01)')
@@ -199,7 +198,6 @@ if __name__ == '__main__':
   # monologg/koelectra-base-v3-discriminator
   # facebook/mbart-large-cc25
   parser.add_argument('--bert_model', type=str, default='xlm-roberta-large', help='backbone bert model for training (default: xlm-roberta-large)')
-  parser.add_argument('--split_valid', type=int, default=1, help='whether split training set (default: 1)')
 
   args = parser.parse_args()
 
